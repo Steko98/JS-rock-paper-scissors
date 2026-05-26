@@ -1,1 +1,1 @@
-# JS-tock-paper-scissors
+# JS-rock-paper-scissors
