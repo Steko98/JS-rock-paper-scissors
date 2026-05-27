@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        let yourChoice;
+        let computerChoice;  
+        let chosenNum;      
+
+      function getComputerChoice() {
+        let randomNum = Math.floor(Math.random() * 3);
+        switch (randomNum) {
+          case 0:
+            return (computerChoice = "Rock");
+            break;
+          case 1:
+            return (computerChoice = "Paper");
+            break;
+          case 2:
+            return (computerChoice = "Scissors");
+            break;
+          default:
+            console.log("something went wrong.");
+        }
+      }
+
+      function getHumanChoice() {
+        chosenNum = +prompt(
+          "Pick 1 for Rock, 2 for Paper or 3 for Scissors:",
+        );
+        switch (chosenNum) {
+          case 1:
+            return (yourChoice = "Rock");
+            break;
+          case 2:
+            return (yourChoice = "Paper");
+            break;
+          case 3:
+            return (yourChoice = "Scissors");
+            break;
+          default:
+            console.log("something went wrong.");
+        }
+      }
+
+      let humanScore = 0;
+      let computerScore = 0;
+
+      function playRound(computer, human) {
+
+        if (computer === human) {
+          console.log(
+            `You chose: ${human}, PC chose ${computer}. It's a draw. Total score is Player: ${humanScore}, Computer: ${computerScore}`,
+          );
+          return;
+        } else if (human === "Rock") {
+          if (computer === "Paper") {
+            computerScore++;
+            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
+            return;
+          } else {
+            humanScore++;
+            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
+            return;               
+          }
+        } else if (human === "Paper"){
+          if (computer === "Scissors") {
+            computerScore++;
+            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
+            return;            
+          } else {
+            humanScore++;
+            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
+            return;            
+          }
+        } else {
+          if (computer === "Rock") {
+            computerScore++;
+            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
+            return; 
+          } else {
+            humanScore++;
+            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
+            return;             
+          }
+        }
+        }
+
+      function playGame(){
+        while (computerScore < 3 && humanScore < 3) {
+            playRound(getComputerChoice(), getHumanChoice())
+        }
+        if (computerScore > humanScore){
+          console.log(`You lost the game. Final score is Player: ${humanScore}, Computer: ${computerScore}`)
+          return;
+        } else {
+          console.log(`You won the game. Final score is Player: ${humanScore}, Computer: ${computerScore}`)
+          return;         
+        }
+        }
+
+      playGame();
+    </script>
+  </body>
+</html>
