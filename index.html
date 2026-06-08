@@ -4,12 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div class="container">
+      <div class="button-box">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+      </div>
+      <div class="result-box">
+        <p id="human-choice">You chose: -</p>
+        <p id="bot-choice">Bot chose: -</p>
+        <p id="round-winner">-</p>
+      </div>
+      <div class="score-box">
+        <h2 id="player-score">Player: 0</h2>
+        <h2 id="bot-score">Bot: 0</h2>
+        <h1 id="final-score">First to 5 wins</h1>
+      </div>
+      <button id="reset-button">Reset</button>
+    </div>
+
     <script>
-        let yourChoice;
-        let computerChoice;  
-        let chosenNum;      
+      let yourChoice;
+      let computerChoice;
+
+      let humanScore = 0;
+      let computerScore = 0;
+
+      const p1ChoiceElement = document.getElementById("human-choice");
+      const botChoiceElement = document.getElementById("bot-choice");
+      const roundWinnerElement = document.getElementById("round-winner");
+      const playerScoreElement = document.getElementById("player-score");
+      const botScoreElement = document.getElementById("bot-score");
+      const finalScoreElement = document.getElementById("final-score");
 
       function getComputerChoice() {
         let randomNum = Math.floor(Math.random() * 3);
@@ -28,82 +57,115 @@
         }
       }
 
-      function getHumanChoice() {
-        chosenNum = +prompt(
-          "Pick 1 for Rock, 2 for Paper or 3 for Scissors:",
-        );
-        switch (chosenNum) {
-          case 1:
-            return (yourChoice = "Rock");
-            break;
-          case 2:
-            return (yourChoice = "Paper");
-            break;
-          case 3:
-            return (yourChoice = "Scissors");
-            break;
-          default:
-            console.log("something went wrong.");
+      function checkIfOver() {
+        if (computerScore === 5) {
+          rock.toggleAttribute("disabled");
+          paper.toggleAttribute("disabled");
+          scissors.toggleAttribute("disabled");
+          finalScoreElement.textContent = `Bot wins the game ${computerScore} to ${humanScore}`;
+          resetButton.textContent = "Play again?";
+        } else if (humanScore === 5) {
+          rock.toggleAttribute("disabled");
+          paper.toggleAttribute("disabled");
+          scissors.toggleAttribute("disabled");
+          finalScoreElement.textContent = `You won the game ${humanScore} to ${computerScore}`;
+          resetButton.textContent = "Play again?";
+        } else {
+          return;
         }
       }
 
-      let humanScore = 0;
-      let computerScore = 0;
-
       function playRound(computer, human) {
+        p1ChoiceElement.textContent = `You chose: ${yourChoice}`;
+        botChoiceElement.textContent = `Bot chose: ${computerChoice}`;
 
         if (computer === human) {
-          console.log(
-            `You chose: ${human}, PC chose ${computer}. It's a draw. Total score is Player: ${humanScore}, Computer: ${computerScore}`,
-          );
+          roundWinnerElement.textContent = "It's a draw.";
           return;
         } else if (human === "Rock") {
           if (computer === "Paper") {
             computerScore++;
-            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
+            botScoreElement.textContent = `Bot: ${computerScore}`;
+            roundWinnerElement.textContent = `Bot wins the round.`;
+            checkIfOver();
             return;
           } else {
             humanScore++;
-            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
-            return;               
+            playerScoreElement.textContent = `Player: ${humanScore}`;
+            roundWinnerElement.textContent = "You win the round.";
+            checkIfOver();
+            return;
           }
-        } else if (human === "Paper"){
+        } else if (human === "Paper") {
           if (computer === "Scissors") {
             computerScore++;
-            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
-            return;            
+            botScoreElement.textContent = `Bot: ${computerScore}`;
+            roundWinnerElement.textContent = `Bot wins the round`;
+            checkIfOver();
+            return;
           } else {
             humanScore++;
-            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
-            return;            
+            playerScoreElement.textContent = `Player: ${humanScore}`;
+            roundWinnerElement.textContent = "You win the round.";
+            checkIfOver();
+            return;
           }
         } else {
           if (computer === "Rock") {
             computerScore++;
-            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
-            return; 
+            botScoreElement.textContent = `Bot: ${computerScore}`;
+            roundWinnerElement.textContent = `Bot wins the round`;
+            checkIfOver();
+            return;
           } else {
             humanScore++;
-            console.log(`You chose: ${human}, PC chose ${computer}. Total score is Player: ${humanScore}, Computer: ${computerScore}`)
-            return;             
+            playerScoreElement.textContent = `Player: ${humanScore}`;
+            roundWinnerElement.textContent = "You win the round.";
+            checkIfOver();
+            return;
           }
         }
-        }
+      }
 
-      function playGame(){
-        while (computerScore < 3 && humanScore < 3) {
-            playRound(getComputerChoice(), getHumanChoice())
-        }
-        if (computerScore > humanScore){
-          console.log(`You lost the game. Final score is Player: ${humanScore}, Computer: ${computerScore}`)
-          return;
-        } else {
-          console.log(`You won the game. Final score is Player: ${humanScore}, Computer: ${computerScore}`)
-          return;         
-        }
-        }
+      const rock = document.getElementById("rock");
+      rock.addEventListener("click", () => {
+          getComputerChoice();
+          yourChoice = "Rock";
+          playRound(computerChoice, yourChoice);
+      });
+      const paper = document.getElementById("paper");
+      paper.addEventListener("click", () => {
+          getComputerChoice();
+          yourChoice = "Paper";
+          playRound(computerChoice, yourChoice);
+      });
+      const scissors = document.getElementById("scissors");
+      scissors.addEventListener("click", () => {
+          getComputerChoice();
+          yourChoice = "Scissors";
+          playRound(computerChoice, yourChoice);
+      });
 
-      playGame();
+      function resetGame() {
+        yourChoice = "";
+        computerChoice = "";
+        computerScore = 0;
+        humanScore = 0;
+        p1ChoiceElement.textContent = "You chose: -";
+        botChoiceElement.textContent = "Bot chose: -";
+        botScoreElement.textContent = "Bot: 0";
+        playerScoreElement.textContent = "Player: 0";
+        roundWinnerElement.textContent = "-";
+        finalScoreElement.textContent = "First to 5 wins";
+        resetButton.textContent = "Reset";
+        rock.toggleAttribute("disabled");
+        paper.toggleAttribute("disabled");
+        scissors.toggleAttribute("disabled");
+        return;
+      }
+
+      const resetButton = document.getElementById("reset-button");
+      resetButton.addEventListener("click", () => resetGame());
     </script>
   </body>
 </html>
