@@ -1,13 +1,121 @@
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+@import url("https://fonts.googleapis.com/css2?family=Unkempt:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Unkempt", cursive;
+  font-weight: 500;
+  font-style: normal;
 }
 
-.container{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;    
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #2b5748;
+  height: 100vh;
+}
+
+.container {
+  min-width: 40%;
+  background-color: #9cb080;
+  border-radius: 15px;
+  box-shadow:
+    rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.footer {
+  min-width: 40%;
+  background-color: #273338;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 15px;
+}
+
+.button-box {
+  /* background-color: #9cb080; */
+  padding: 12px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  /* min-width: 40%; */
+}
+
+input {
+  padding: 8px 16px;
+  font-size: 24px;
+  border: none;
+  border-radius: 10px;
+  padding: auto;
+}
+
+input:hover{
+  transform: scale(1.05);
+  box-shadow: #273338 0px 8px 4px 0px;
+}
+
+.result-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #9cb080;
+  min-width: 40%;
+  align-items: center;
+}
+
+.choice-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  gap: 12px;
+}
+
+.icon {
+  height: 72px;
+}
+
+#round-winner {
+  align-self: center;
+  justify-self: center;
+  padding: 12px 24px;
+}
+
+.score-box {
+  min-width: 40%;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #9cb080;
+}
+
+#reset-button {
+  padding: 12px 24px;
+  font-size: 26px;
+  background-color: rgb(255, 215, 0);
+  border: none;
+  border-radius: 5px;
+}
+
+#reset-button:hover{
+  transform: scale(1.05);
+  box-shadow: #273338 0px 8px 4px 0px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
